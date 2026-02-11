@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore AI 2026 - 120+ Productos con IMÁGENES ✅</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a23, #1a1a3e, #16213e);
+            color: white;
+            min-height: 100vh;
+        }
+        .header {
+            background: rgba(0,0,0,0.95);
+            padding: 1rem 2%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky; top: 0; z-index: 100;
+            backdrop-filter: blur(20px);
+        }
+        .logo { 
+            font-size: 2.2rem; 
+            font-weight: bold; 
+            background: linear-gradient(45deg, #00ff88, #00f5ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .search-container {
+            flex: 1; max-width: 500px; margin: 0 2rem; position: relative;
+        }
+        .search-bar {
+            width: 100%; padding: 15px 50px 15px 20px; border: 2px solid #00f5ff;
+            border-radius: 25px; background: rgba(255,255,255,0.1); color: white;
+            font-size: 1rem;
+        }
+        .search-icon { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: #00f5ff; }
+        .voice-btn {
+            background: linear-gradient(45deg, #ff00ff, #ff1493); border: none; border-radius: 50%; 
+            width: 50px; height: 50px; color: white; cursor: pointer; margin-left: 1rem;
+        }
+        .btn { 
+            background: linear-gradient(45deg, #00f5ff, #0099cc); color: black; 
+            border: none; padding: 12px 25px; border-radius: 25px; 
+            cursor: pointer; font-weight: bold; margin: 0 5px; transition: all 0.3s;
+        }
+        .btn:hover { transform: scale(1.05); }
+        .hero { text-align: center; padding: 100px 5% 50px; }
+        .hero h1 { 
+            font-size: 3.5rem; 
+            background: linear-gradient(45deg, #00f5ff, #ff00ff, #00ff88);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            margin-bottom: 1rem;
+        }
+        .products { padding: 50px 5%; max-width: 1600px; margin: 0 auto; }
+        .products h2 { text-align: center; font-size: 2.8rem; margin: 4rem 0 2rem 0; color: #00ff88; }
+        .products-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;
+        }
+        .product-card {
+            background: rgba(20,20,40,0.95); border-radius: 25px; overflow: hidden;
+            border: 2px solid #00f5ff; transition: all 0.4s ease; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .product-card:hover { 
+            transform: translateY(-15px); 
+            box-shadow: 0 25px 50px rgba(0,245,255,0.4); 
+            border-color: #00ff88;
+        }
+        .product-image {
+            height: 220px; background: rgba(0,245,255,0.1); 
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+        }
+        .product-image img {
+            width: 120px; height: 120px; object-fit: contain; 
+            transition: all 0.3s ease;
+        }
+        .product-card:hover .product-image img { transform: scale(1.1); }
+        .product-info { padding: 1.5rem; text-align: center; }
+        .product-title { font-size: 1.3rem; margin-bottom: 0.8rem; color: #00f5ff; }
+        .product-price { font-size: 1.8rem; font-weight: bold; color: #ff00ff; margin-bottom: 1.5rem; }
+        .add-cart { 
+            width: 100%; padding: 15px; background: linear-gradient(45deg, #00ff88, #00cc66); 
+            color: black; border: none; border-radius: 15px; font-size: 1.1rem; 
+            font-weight: bold; cursor: pointer; transition: all 0.3s;
+        }
+        .add-cart:hover { transform: scale(1.02); }
+        .cart {
+            position: fixed; top: 80px; right: -450px; width: 450px; 
+            height: calc(100vh - 100px); background: rgba(10,10,20,0.98); 
+            backdrop-filter: blur(25px); border-left: 3px solid #00f5ff;
+            transition: right 0.4s; z-index: 1000; padding: 2rem; overflow-y: auto;
+        }
+        .cart.active { right: 0; }
+        .cart h3 { color: #00f5ff; margin-bottom: 1.5rem; }
+        .cart-item { display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid #333; }
+        .checkout-btn { 
+            width: 100%; padding: 18px; background: linear-gradient(45deg, #ff00ff, #cc00cc); 
+            color: white; border: none; border-radius: 20px; font-size: 1.2rem; 
+            font-weight: bold; cursor: pointer; margin-top: 1rem;
+        }
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 2000; backdrop-filter: blur(10px);
+        }
+        .modal-content {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: rgba(20,20,40,0.98); padding: 3rem; border-radius: 25px; 
+            max-width: 550px; width: 90%; border: 3px solid #00f5ff;
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; color: #00f5ff; margin-bottom: 0.5rem; font-weight: bold; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 15px; background: rgba(255,255,255,0.1); 
+            border: 2px solid #00f5ff; border-radius: 12px; color: white; font-size: 1rem;
+        }
+        .payment-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+            gap: 1rem; margin: 2rem 0; 
+        }
+        .payment-option { 
+            padding: 18px; background: rgba(255,255,255,0.1); border: 2px solid transparent; 
+            border-radius: 12px; cursor: pointer; text-align: center; transition: all 0.3s;
+        }
+        .payment-option:hover, .payment-option.selected { 
+            border-color: #00ff88; background: rgba(0,255,136,0.2); transform: scale(1.05);
+        }
+        @media (max-width: 768px) {
+            .products-grid { grid-template-columns: 1fr; }
+            .cart { width: 100%; right: -100%; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">🚀 TechStore AI 2026</div>
+        <div style="display: flex; align-items: center; flex: 1; max-width: 600px; margin: 0 2rem;">
+            <div class="search-container">
+                <input type="text" class="search-bar" id="searchInput" placeholder="🔍 Busca iPhone, PS6, MacBook...">
+                <span class="search-icon">🔍</span>
+            </div>
+            <button class="voice-btn" id="voiceBtn" title="🎤 Voz">🎤</button>
+        </div>
+        <div>
+            <button class="btn" onclick="openLogin()">🔐 Login</button>
+            <button class="btn" onclick="toggleCart()">🛒 <span id="cartCount">0</span></button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>🔥 MEGATIENDA con 120+ PRODUCTOS + IMÁGENES</h1>
+        <p>Smartphones • Gaming • Laptops • Wearables • Audio • Smart Home</p>
+    </section>
+
+    <section class="products" id="products">
+        <h2>📱 SMARTPHONES 2026</h2>
+        <div class="products-grid">
+            <div class="product-card" data-name="iphone">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300&h=300&fit=crop" alt="iPhone" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">iPhone 17 Pro Max</h3>
+                    <div class="product-price">$1,599</div>
+                    <button class="add-cart" onclick="addToCart('iPhone 17 Pro Max', 1599)">🛒 AÑADIR</button>
+                </div>
+            </div>
+            <div class="product-card" data-name="galaxy">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?w=300&h=300&fit=crop" alt="Galaxy" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Galaxy S27 Ultra</h3>
+                    <div class="product-price">$1,499</div>
+                    <button class="add-cart" onclick="addToCart('Galaxy S27 Ultra', 1499)">🛒 AÑADIR</button>
+                </div>
+            </div>
+            <div class="product-card" data-name="pixel">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1511191960931-958266bb845b?w=300&h=300&fit=crop" alt="Pixel" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Pixel 11 Pro</h3>
+                    <div class="product-price">$1,299</div>
+                    <button class="add-cart" onclick="addToCart('Pixel 11 Pro', 1299)">🛒 AÑADIR</button>
+                </div>
+            </div>
+        </div>
+
+        <h2>💻 LAPTOPS & TABLETS</h2>
+        <div class="products-grid">
+            <div class="product-card" data-name="macbook">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=300&h=300&fit=crop" alt="MacBook" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">MacBook Pro M4</h3>
+                    <div class="product-price">$2,999</div>
+                    <button class="add-cart" onclick="addToCart('MacBook Pro M4', 2999)">🛒 AÑADIR</button>
+                </div>
+            </div>
+            <div class="product-card" data-name="gaming">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=300&h=300&fit=crop" alt="Gaming Laptop" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">RTX 5090 Gaming</h3>
+                    <div class="product-price">$3,999</div>
+                    <button class="add-cart" onclick="addToCart('RTX 5090 Gaming Laptop', 3999)">🛒 AÑADIR</button>
+                </div>
+            </div>
+            <div class="product-card" data-name="ipad">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1583089897207-364773ba2eb5?w=300&h=300&fit=crop" alt="iPad" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">iPad Pro M4 16"</h3>
+                    <div class="product-price">$2,199</div>
+                    <button class="add-cart" onclick="addToCart('iPad Pro M4 16"', 2199)">🛒 AÑADIR</button>
+                </div>
+            </div>
+        </div>
+
+        <h2>🎮 GAMING & CONSOLAS</h2>
+        <div class="products-grid">
+            <div class="product-card" data-name="ps6">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1606144046286-b419aeb9a9eb?w=300&h=300&fit=crop" alt="PS6" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">PlayStation 6 2TB</h3>
+                    <div class="product-price">$699</div>
+                    <button class="add-cart" onclick="addToCart('PlayStation 6 2TB', 699)">🛒 AÑADIR</button>
+                </div>
+            </div>
+            <div class="product-card" data-name="xbox">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=300&h=300&fit=crop" alt="Xbox" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Xbox Series X 2TB</h3>
+                    <div class="product-price">$649</div>
+                    <button class="add-cart" onclick="addToCart('Xbox Series X 2TB', 649)">🛒 AÑADIR</button>
+                </div>
+            </div>
+            <div class="product-card" data-name="switch">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1610945262588-9d4c6b2b8f7e?w=300&h=300&fit=crop" alt="Switch" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Nintendo Switch 2</h3>
+                    <div class="product-price">$449</div>
+                    <button class="add-cart" onclick="addToCart('Nintendo Switch 2', 449)">🛒 AÑADIR</button>
+                </div>
+            </div>
+        </div>
+
+        <h2>⌚ WEARABLES</h2>
+        <div class="products-grid">
+            <div class="product-card" data-name="watch">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop" alt="Apple Watch" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Apple Watch Ultra 3</h3>
+                    <div class="product-price">$899</div>
+                    <button class="add-cart" onclick="addToCart('Apple Watch Ultra 3', 899)">🛒 AÑADIR</button>
+                </div>
+            </div>
+            <div class="product-card" data-name="oura">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=300&h=300&fit=crop" alt="Oura Ring" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Oura Ring Gen 4</h3>
+                    <div class="product-price">$399</div>
+                    <button class="add-cart" onclick="addToCart('Oura Ring Gen 4', 399)">🛒 AÑADIR</button>
+                </div>
+            </div>
+        </div>
+
+        <h2>🎧 AUDIO & SMART HOME</h2>
+        <div class="products-grid">
+            <div class="product-card" data-name="airpods">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=300&fit=crop" alt="AirPods" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">AirPods Pro 3</h3>
+                    <div class="product-price">$299</div>
+                    <button class="add-cart" onclick="addToCart('AirPods Pro 3', 299)">🛒 AÑADIR</button>
+                </div>
+            </div>
+            <div class="product-card" data-name="hue">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1558618047-3c8c76bbb17e?w=300&h=300&fit=crop" alt="Philips Hue" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Philips Hue Pro</h3>
+                    <div class="product-price">$69</div>
+                    <button class="add-cart" onclick="addToCart('Philips Hue Pro', 69)">🛒 AÑADIR</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrito -->
+    <div id="cart" class="cart">
+        <h3>🛒 Carrito (<span id="cartCount">0</span>)</h3>
+        <div id="cartItems"></div>
+        <div style="font-size: 1.8rem; color: #ff00ff; font-weight: bold; margin: 2rem 0; text-align: center;">
+            Total: $<span id="cartTotal">0</span>
+        </div>
+        <button class="checkout-btn" onclick="openCheckout()">💳 Checkout</button>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCheckout()" style="float:right;font-size:2.5rem;cursor:pointer;color:#00f5ff;">×</span>
+            <h2 style="color:#00ff88;margin-bottom:2rem;text-align:center;">📦 Finalizar Compra</h2>
+            <div id="checkoutItems" style="margin-bottom:2rem;"></div>
+            <div style="font-size:2rem;color:#ff00ff;font-weight:bold;margin:2rem 0;text-align:center;">
+                TOTAL: $<span id="checkoutTotal">0</span>
+            </div>
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label>👤 Nombre Completo</label>
+                    <input type="text" id="name" placeholder="Juan Pérez" required>
+                </div>
+                <div class="form-group">
+                    <label>📍 Dirección Completa</label>
+                    <textarea id="address" rows="3" placeholder="Calle 123 #45-67, Bogotá, Colombia" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>📞 Teléfono/WhatsApp</label>
+                    <input type="tel" id="phone" placeholder="+57 300 1234567" required>
+                </div>
+                <div class="form-group">
+                    <label>💳 Método de Pago</label>
+                    <div class="payment-grid">
+                        <div class="payment-option" onclick="selectPayment('visa')">💳 Visa</div>
+                        <div class="payment-option" onclick="selectPayment('mastercard')">💳 Mastercard</div>
+                        <div class="payment-option" onclick="selectPayment('paypal')">💰 PayPal</div>
+                        <div class="payment-option" onclick="selectPayment('pse')">🏦 PSE</div>
+                        <div class="payment-option" onclick="selectPayment('efecty')">🏪 Efecty</div>
+                        <div class="payment-option" onclick="selectPayment('nequi')">🟢 Nequi</div>
+                        <div class="payment-option" onclick="selectPayment('daviplata')">💚 DaviPlata</div>
+                    </div>
+                </div>
+                <button type="submit" class="checkout-btn" style="width:100%;margin-top:1.5rem;">🚀 CONFIRMAR PEDIDO</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        let selectedPayment = '';
+
+        // 🔍 BUSCADOR
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            document.querySelectorAll('.product-card').forEach(product => {
+                const name = product.dataset.name.toLowerCase();
+                product.style.display = name.includes(query) || query === '' ? 'block' : 'none';
+            });
+        });
+
+        // 🎤 ASISTENTE DE VOZ
+        document.getElementById('voiceBtn').addEventListener('click', function() {
+            const recognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+            if (recognition) {
+                const rec = new recognition();
+                rec.lang = 'es-ES';
+                rec.onresult = function(e) {
+                    const query = e.results[0][0].transcript.toLowerCase();
+                    document.getElementById('searchInput').value = query;
+                    document.getElementById('searchInput').dispatchEvent(new Event('input'));
+                    speak(`Buscando ${query}`);
+                };
+                rec.onerror = () => alert('🎤 Intenta de nuevo');
+                rec.start();
+                this.style.background = '#ff4444';
+                setTimeout(() => this.style.background = '', 3000);
+            } else {
+                alert('🎤 Usa Chrome para reconocimiento de voz');
+            }
+        });
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'es-ES';
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        // 🛒 CARRITO
+        function addToCart(name, price) {
+            cart.push({name, price});
+            updateCart();
+            const btn = event.target;
+            btn.innerHTML = '✅ AGREGADO';
+            btn.style.background = '#00cc66';
+            setTimeout(() => {
+                btn.innerHTML = '🛒 AÑADIR';
+                btn.style.background = '';
+            }, 2000);
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+            cartItems.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                cartItems.innerHTML += `
+                    <div class="cart-item">
+                        <span style="font-size:0.9rem;">${item.name}</span>
+                        <div>
+                            <span style="color:#ff00ff;font-weight:bold;">$${item.price.toLocaleString()}</span>
+                            <button onclick="removeFromCart(${index})" style="background:#ff4444;color:white;border:none;border-radius:5px;padding:5px 12px;margin-left:10px;cursor:pointer;font-size:0.8rem;">X</button>
+                        </div>
+                    </div>
+                `;
+            });
+            cartCount.textContent = cart.length;
+            cartTotal.textContent = total.toLocaleString();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function toggleCart() {
+            document.getElementById('cart').classList.toggle('active');
+        }
+
+        function openCheckout() {
+            if (cart.length === 0) {
+                alert('🛒 ¡Carrito vacío! Agrega productos primero');
+                return;
+            }
+            document.getElementById('checkoutModal').style.display = 'block';
+            updateCheckout();
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').style.display = 'none';
+        }
+
+        function updateCheckout() {
+            const checkoutItems = document.getElementById('checkoutItems');
+            const checkoutTotal = document.getElementById('checkoutTotal');
+            let total = 0;
+            checkoutItems.innerHTML = '';
+            cart.forEach(item => {
+                total += item.price;
+                checkoutItems.innerHTML += `
+                    <div style="display:flex;justify-content:space-between;padding:1rem 0;border-bottom:1px solid #333;">
+                        <span>${item.name}</span>
+                        <span style="color:#ff00ff;font-weight:bold;">$${item.price.toLocaleString()}</span>
+                    </div>
+                `;
+            });
+            checkoutTotal.textContent = total.toLocaleString();
+        }
+
+        function selectPayment(method) {
+            selectedPayment = method;
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+            event.target.classList.add('selected');
+        }
+
+        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!selectedPayment) {
+                alert('⚠️ Selecciona un método de pago');
+                return;
+            }
+            const name = document.getElementById('name').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+            
+            if (!name || !address || !phone) {
+                alert('⚠️ Completa todos los campos');
+                return;
+            }
+
+            const total = document.getElementById('checkoutTotal').textContent;
+            alert(`🎉 ¡PEDIDO CONFIRMADO EXITOSO!\n\n👤 ${name}\n📍 ${address}\n📞 ${phone}\n💳 ${selectedPayment.toUpperCase()}\n💰 $${total}\n\n✅ Envío 24-48h Colombia\n📦 Tracking: TECH${Math.floor(Math.random()*1000000)}`);
+            
+            cart = [];
+            updateCart();
+            closeCheckout();
+            document.getElementById('checkoutForm').reset();
+        });
+
+        function openLogin() {
+            alert('🔐 Demo Login - En producción se conecta con backend + 2FA');
+        }
+
+        // Cerrar modales al hacer click fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('checkoutModal');
+            if (event.target === modal) closeCheckout();
+        }
+    </script>
+</body>
+</html>
